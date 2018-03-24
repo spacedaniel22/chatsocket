@@ -1,3 +1,85 @@
+*,
+*::after,
+*::before {
+    font-family: monospace;
+    box-sizing: border-box;
+}
+
 body {
-    background-color: aliceblue;
+    font-size: 12px;
+    font-family: monospace;
+    padding: 0;
+    margin: 0;
+}
+
+input:focus,
+button:focus {
+    outline: none;
+}
+
+input[type="text"],
+.send {
+    font-size: 1em;
+    height: 2.08em;
+    border: 0.2em solid black;
+}
+
+input[type="text"] {
+    padding: 0.3em 0.2em;
+    display: inline-block;
+    width: 0;
+}
+
+.send {
+    border-radius: 0;
+    cursor: pointer;
+}
+
+.chat-window {
+    position: relative;
+    font-size: 1em;
+    width: 27em;
+    height: 41em;
+    padding: 1em;
+    margin: 1.666em;
+    border: 0.2em solid black
+}
+
+.messages {
+    height: 90%;
+    overflow: scroll;
+}
+
+.messages::-webkit-scrollbar {
+    display: none;
+}
+
+.bottom {
+    height: 10%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.bottom > * {
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+
+.user,
+.send {
+    flex-basis: 18%;
+}
+
+.msgInput {
+    flex-basis: calc(64% - 2em);
+}
+
+.message {
+    font-size: 1em;
+    margin-bottom: 2em;
+}
+
+.message.own {
+    text-align: right;
 }

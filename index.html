@@ -6,12 +6,20 @@
     <title>ChatSocket</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.0/socket.io.min.js"></script>
+    <script src="socket.io.js"></script>
 </head>
 <body>
-    <main>
-        <h1>ChatSocket</h1>
+    <main class="chat-window">
+        <section class="messages">
+        </section>
+
+        <section class="bottom">
+            <input type="text" autocomplete="off" name="user" class="user" value="Guest">
+            <input type="text" autocomplete="off" name="msgInput" class="msgInput">
+            <button type="submit" class="send">SEND</button>
+        </section>
     </main>
-    <script src="main.js"></script>
+
+    <script src="app.js"></script>
 </body>
 </html>
