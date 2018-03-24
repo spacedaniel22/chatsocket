@@ -1,4 +1,5 @@
 (() => {
+    "use strict";
     const ConfigEnum = {
         SocketServerAddress: "http://185.13.90.140:8081/",
         MessageType: {
@@ -43,12 +44,22 @@
 
     }
 
+    const server = new Server(io, ConfigEnum.SocketServerAddress);
+    const connection = server.socket;
+    connection.on(ConfigEnum.MessageType.MESSAGE, (data) => {
+        const newMessage = new Message(data, false);
+        handleInsert(newMessage.template);
+    });
+
     function handleInsert(template) {
         messages$.insertAdjacentHTML(ConfigEnum.HtmlToInsert, template);
         messages$.scrollTop = messages$.scrollHeight;
     }
 
     function handleSend() {
+        if (!msgInput$.value) {
+            return;
+        }
         const data = { user: user$.value, message: msgInput$.value }
         server.sendMessage(data);
         const ownMessage = new Message(data, true);
@@ -56,13 +67,6 @@
         msgInput$.value = "";
         return false;
     }
-
-    const server = new Server(io, ConfigEnum.SocketServerAddress);
-    const connection = server.socket;
-    connection.on(ConfigEnum.MessageType.MESSAGE, (data) => {
-        const newMessage = new Message(data, false);
-        handleInsert(newMessage.template);
-    });
 
     msgInput$.addEventListener("keydown", (event) => {
         if (event.which === ConfigEnum.KeyCodes.ENTER || event.keyCode === ConfigEnum.KeyCodes.ENTER) {
